@@ -2,6 +2,8 @@ import React from 'react'
 import './index.css'
 import { fetchPhotos,fetchVideos,fetchGifs  } from './api/mediaApi'
 import SearchBar from './components/SearchBar.jsx'
+import Tabs from './components/Tabs.jsx'
+import ResultGrid from './components/ResultGrid.jsx'
 const App = () => {
   const getPhotos=async ()=>{
     const photoData = await fetchPhotos('cat')
@@ -19,10 +21,12 @@ const App = () => {
     }
 
   return (
-    <div className="h-screen w-screen flex flex-col gap-3 bg-red-400">
+    <div className="h-full w-full flex flex-col gap-y-3 bg-red-400">
         <div className="mt-10 ml-0">
-           <SearchBar />
+           <SearchBar/>
         </div>
+            <Tabs />
+            <ResultGrid />
          <span className="text-white text-center text-6xl">HELLO <br />
              EVERYONE
             </span> 

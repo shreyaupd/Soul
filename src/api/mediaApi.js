@@ -24,7 +24,7 @@ export const fetchVideos = async ( query,page=1,per_page=20) => {
             per_page
           },
           headers: {
-            Authorization: `Client-ID ${PEXELS_KEY}`
+            Authorization: `${PEXELS_KEY}`
           }
     })
     return res.data.videos
