@@ -1,8 +1,7 @@
 import React from 'react'
 import './index.css'
-import { fetchPhotos } from './api/mediaApi'
-import { fetchVideos } from './api/mediaApi'
-import { fetchGifs } from './api/mediaApi'
+import { fetchPhotos,fetchVideos,fetchGifs  } from './api/mediaApi'
+import SearchBar from './components/SearchBar.jsx'
 const App = () => {
   const getPhotos=async ()=>{
     const photoData = await fetchPhotos('cat')
@@ -20,8 +19,11 @@ const App = () => {
     }
 
   return (
-    <div className="h-screen w-screen flex flex-col justify-center items-center gap-3 bg-red-400">
-             <span className="text-white text-center text-6xl">HELLO <br />
+    <div className="h-screen w-screen flex flex-col gap-3 bg-red-400">
+        <div className="mt-10 ml-0">
+           <SearchBar />
+        </div>
+         <span className="text-white text-center text-6xl">HELLO <br />
              EVERYONE
             </span> 
             <div className="flex gap-3">
@@ -30,7 +32,7 @@ const App = () => {
                <button className="w-30 h-10 bg-white text-red-400 px-4 py-2 rounded-md hover:bg-gray-200" onClick={getGifs}>Gifs</button>
             </div>
             
-    </div>
+        </div>
   )
 }
 
