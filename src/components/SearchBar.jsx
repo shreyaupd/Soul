@@ -24,7 +24,7 @@ const SearchBar = () => {
         />
         <button
           type="submit"
-          className="absolute right-1 top-1/2 -translate-y-1/2 h-10 w-10 flex items-center justify-center rounded-full bg-red-400 text-white hover:bg-red-500 focus:outline-none transition-colors"
+          className="absolute right-1 top-1/2 -translate-y-1/2 h-10 w-10 flex items-center justify-center rounded-full bg-red-400 text-white hover:bg-red-500 focus:outline-none transition-colors cursor-pointer"
         >
           <Search className="h-5 w-5 active:scale-1 focus:outline-none" />
         </button>
