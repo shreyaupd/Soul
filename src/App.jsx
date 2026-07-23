@@ -1,6 +1,6 @@
 import {useEffect} from 'react'
 import './index.css'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { fetchPhotos,fetchVideos,fetchGifs  } from './api/mediaApi'
 import SearchBar from './components/SearchBar.jsx'
 import Tabs from './components/Tabs.jsx'
@@ -12,14 +12,23 @@ import { useSelector } from 'react-redux'
 const App = () => {
   const query = useSelector((store) => store.search.query);
 
+  const Header = () => {
+    const location = useLocation();
+    const hideTabs = location.pathname === '/collection';
+
+    return (
+      <div className="pt-8 pb-6 flex flex-col items-center gap-6">
+        <Navbar />
+        <SearchBar />
+        {!hideTabs && <Tabs />}
+      </div>
+    );
+  };
+
   return (
     <BrowserRouter>
       <div className="w-full min-h-screen bg-red-400">
-        <div className="pt-8 pb-6 flex flex-col items-center gap-6">
-          <Navbar />
-          <SearchBar/>
-          <Tabs />
-        </div>
+        <Header />
         <div className="px-4 pb-8">
           <Routes>
             <Route path="/" element={<ResultGrid />} />
@@ -28,7 +37,7 @@ const App = () => {
         </div>
       </div>
     </BrowserRouter>
-  )
-}
+  );
+};
 
 export default App

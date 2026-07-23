@@ -16,7 +16,7 @@ const CollectionPage = () => {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
       {items.map((item) => (
-        <ResultCard key={item.id} item={item} />
+        <ResultCard key={item.id} item={item} showTypeBadge={true} />
       ))}
     </div>
   );

@@ -31,10 +31,10 @@ const ResultGrid = () => {
               description: video.url.split("/")[4].replace(/-\d+$/, "").replaceAll("-", " "),
               image: video.image,
               url: video.url,
+              videoSrc: video.video_files?.[0]?.link || '',
               author: video.user.name,
               type: "video"
-            }))
-
+            }));
           }
           if (activeTab === 'gifs') {
             data = await fetchGifs(query);
@@ -44,7 +44,7 @@ const ResultGrid = () => {
               image: gif.file.hd.gif.url,
               author: "",
               type: "gif"
-            }))
+            }));
           }
           console.log('Results:', data);
           dispatch(setResults(data || [])); //results is array of objects which has value of data
@@ -106,6 +106,7 @@ const ResultGrid = () => {
                 description: video.url.split("/")[4].replace(/-\d+$/, "").replaceAll("-", " "),
                 image: video.image,
                 url: video.url,
+                videoSrc: video.video_files?.[0]?.link || '',
                 author: video.user.name,
                 type: "video"
               };
