@@ -1,10 +1,15 @@
 import { useState } from 'react';
-import { Loader2 } from 'lucide-react';
-import { useSelector } from 'react-redux';
+import { Loader2, Heart } from 'lucide-react';
+import { useSelector,useDispatch } from 'react-redux';
+import { addToCollection,removeFromCollection } from '../redux/features/collectionSlice';
 
 const ResultCard = ({item}) => {
   const loading = useSelector((state) => state.search.loading);
   const [imageLoaded, setImageLoaded] = useState(false);
+
+const dispatch = useDispatch();
+const collectionItems = useSelector((state)=>state.collection.items) //store the currnt item after rerender(after  useselector runs)
+const isSaved = collectionItems.some(colItem => colItem.id === item.id); //returns true or false after looping through every itm in collectionItem to find the colletionitem whose id is === item.id(urrent item to chek if its already saved)
 
   const handleClick = () => {
     if(item.type === "video"){
@@ -39,8 +44,9 @@ const ResultCard = ({item}) => {
       </div>
 
       {/* content section */}
-      <div className="p-3">
-        <p className="text-gray-700 text-sm leading-snug line-clamp-2">
+      <div className="p-3 flex flex-row justify-between">
+        <div className="flex flex-col">
+          <p className="text-gray-700 text-sm leading-snug line-clamp-2">
           {item.description}
         </p>
 
@@ -49,6 +55,19 @@ const ResultCard = ({item}) => {
             {item.author}
           </p>
         )}
+        </div>
+        <div className="mt-2 mr-0">
+          <Heart
+            className={`cursor-pointer ${isSaved ? 'fill-red-500 text-red-500' : 'text-gray-400'}`}
+            onClick={() => {
+              if (isSaved) {
+                dispatch(removeFromCollection(item.id));
+              } else {
+                dispatch(addToCollection(item));
+              }
+            }}
+          />
+        </div>
       </div>
 
     </div>
